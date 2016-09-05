@@ -18,6 +18,7 @@ gem 'devise'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
+gem 'activerecord-import'
 group :development do
   gem 'better_errors'
   gem 'html2haml'
