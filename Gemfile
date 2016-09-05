@@ -19,6 +19,8 @@ gem 'haml-rails'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'activerecord-import'
+gem 'delayed_job_active_record'
+gem 'cancan'
 group :development do
   gem 'better_errors'
   gem 'html2haml'
