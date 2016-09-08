@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-ruby '2.3.0'
+source 'http://tesa15:8808'
+ruby '2.3.1'
 gem 'rails', '4.2.7.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -32,7 +32,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop'
-  gem 'sqlite3'
+  gem 'sqlite3', platforms: [:mingw, :mswin, :x64_mingw]
 end
 group :production do
   gem 'pg'
@@ -44,3 +44,4 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]

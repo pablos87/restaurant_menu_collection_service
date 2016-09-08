@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: http://tesa15:8808/
   specs:
     actionmailer (4.2.7.1)
       actionpack (= 4.2.7.1)
@@ -44,6 +44,7 @@ GEM
     autoprefixer-rails (6.4.0.3)
       execjs
     bcrypt (3.1.11)
+    bcrypt (3.1.11-x64-mingw32)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -98,6 +99,7 @@ GEM
     faker (1.6.6)
       i18n (~> 0.5)
     ffi (1.9.14)
+    ffi (1.9.14-x64-mingw32)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -136,6 +138,9 @@ GEM
     minitest (5.9.0)
     multi_json (1.12.1)
     nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
+    nokogiri (1.6.8-x64-mingw32)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
@@ -234,7 +239,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.3.11)
+    sqlite3 (1.3.11-x64-mingw32)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
@@ -243,6 +248,8 @@ GEM
     tilt (2.0.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2016.2)
+      tzinfo (>= 1.0.0)
     uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.1.0)
@@ -259,6 +266,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   activerecord-import
@@ -291,8 +299,12 @@ DEPENDENCIES
   spring-commands-rspec
   sqlite3
   therubyracer
+  tzinfo-data
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+
+RUBY VERSION
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.12.5
