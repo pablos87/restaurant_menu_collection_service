@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 20160908114014) do
     t.integer  "image_id"
     t.integer  "full_height"
     t.integer  "full_width"
-    t.integer  "uuid"
+    t.string   "uuid"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

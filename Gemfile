@@ -1,4 +1,4 @@
-source 'http://tesa15:8808'
+source 'http://rubygems.org'
 ruby '2.3.1'
 gem 'rails', '4.2.7.1'
 gem 'sass-rails', '~> 5.0'
@@ -21,6 +21,7 @@ gem 'therubyracer', :platform=>:ruby
 gem 'activerecord-import'
 gem 'delayed_job_active_record'
 gem 'cancan'
+gem 'shoulda'
 group :development do
   gem 'better_errors'
   gem 'html2haml'
@@ -32,7 +33,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'rubocop'
-  gem 'sqlite3', platforms: [:mingw, :mswin, :x64_mingw]
+  gem 'sqlite3'
 end
 group :production do
   gem 'pg'
@@ -44,4 +45,3 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]

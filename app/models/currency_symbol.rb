@@ -1,3 +1,5 @@
 class CurrencySymbol < ActiveRecord::Base
-  has_many :currency
+  has_many :currencies
+
+  validates :name, presence: true, length: { maximum: 255 }
 end

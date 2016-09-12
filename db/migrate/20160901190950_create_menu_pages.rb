@@ -6,7 +6,7 @@ class CreateMenuPages < ActiveRecord::Migration
       t.integer :image_id
       t.integer :full_height
       t.integer :full_width
-      t.integer :uuid
+      t.string :uuid
 
       t.timestamps null: false
     end

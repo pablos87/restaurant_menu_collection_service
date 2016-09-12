@@ -39,17 +39,21 @@ class Import
     print_memory_usage do
       print_time_spent do
         sum = 0
-	data_files.map{ |file| [get_model_name(file), file] }.to_h.sort_by_array(order).values.each do |file|
-          model_name = ''
-          objects = []
-          CSV.foreach(file.path, headers: true) do |row|
-            model_name = get_model_name(row.headers) if model_name.blank?
-            objects << model_name.constantize.new(row.to_hash.symbolize_keys)
-	    sum += 1
+	ActiveRecord::Base.transaction do
+	  data_files.map{ |file| [get_model_name(file), file] }.to_h.sort_by_array(FILES_SORT_ORDER).values.each do |file|
+            model_name = ''
+            objects = []
+            Rails.logger.silence do
+              CSV.foreach(file.path, headers: true) do |row|
+                model_name = get_model_name_by_header(row.headers) if model_name.blank?
+                objects << model_name.constantize.new(row.to_hash.symbolize_keys)
+	        sum += 1
+              end
+            end
+            model_name.constantize.import objects.uniq(&:id), recursive: true
+	    model_name = ''
+            puts "Sum: #{sum}"
           end
-          model_name.import objects
-	  model_name = ''
-          puts "Sum: #{sum}"
         end
       end
     end

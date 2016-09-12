@@ -1,5 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Image, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject{
+    described_class.new(path: "\\")
+  }
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(subject).to be_valid
+    end
+    it "is not valid with empty path" do
+      subject.path = nil
+      expect(subject).to_not be_valid
+    end
+    it "is not valid with too long path" do
+      subject.path = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea c
+ommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      expect(subject).to_not be_valid
+    end
+  end
+
+  describe "Associations" do
+    it { should have_many(:menu_pages) }
+  end
 end

@@ -1,3 +1,4 @@
+require "spec_helper"
 # Feature: Sign out
 #   As a user
 #   I want to sign out
@@ -13,7 +14,7 @@ feature 'Sign out', :devise do
     signin(user.email, user.password)
     expect(page).to have_content I18n.t 'devise.sessions.signed_in'
     click_link 'Sign out'
-    expect(page).to have_content I18n.t 'devise.sessions.signed_out'
+    expect(page).to have_content I18n.t 'devise.failure.unauthenticated'
   end
 
 end

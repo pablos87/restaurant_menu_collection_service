@@ -15,7 +15,7 @@ class Menu < ActiveRecord::Base
   has_many :menu_pages
 
   validates :name, length: { maximum: 255 }, allow_blank: true
-  validates :sponsor_id, :event_id, :venue_id, :place_id, :occasion_id, :language_id, :currency_id, :location_id, :status_id, numericality: { greater_than: 0 }, allow_blank: true 
+  #validates :sponsor_id, :event_id, :venue_id, :place_id, :occasion_id, :language_id, :currency_id, :location_id, :status_id, numericality: { greater_than: 0 }, allow_blank: true 
   validates :physical_description, length: { maximum: 255 }, allow_blank: true
   validates :notes, length: { maximum: 1000 }, allow_blank: true
   validates :date, format: { with: /\A\d{4}-\d{2}-\d{2}\z/, message: 'must be in format yyyy-mm-dd' }, allow_blank: true
@@ -114,7 +114,7 @@ class Menu < ActiveRecord::Base
       words = k.split(',')
       words.each do |w|
  	word = Keyword.find_or_initialize_by(name: w)
-        self.keywords << word
+        self.keywords.push word
       end
     end
   end
