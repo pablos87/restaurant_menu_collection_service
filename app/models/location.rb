@@ -1,6 +1,6 @@
 class Location < ActiveRecord::Base
-  has_many :menus
-  belongs_to :location_type
+  has_many :menus, inverse_of: :location
+  belongs_to :location_type, inverse_of: :locations
 
   validates :location_type, presence: true
   validates :name, presence: true, length: { maximum: 255 }

@@ -1,0 +1,21 @@
+%dl.dl-horizontal
+  %dt= 'Id'
+  %dd= @menu.id
+  %dt= 'Sponsor'
+  %dd= @menu.sponsor.try(:name)
+  %dt= 'Event'
+  %dd= @menu.event.try(:name)
+  %dt= 'Venue'
+  %dd= @menu.venue.try(:name)
+  %dt= 'Place'
+  %dd= @menu.place.try(:name)
+  %dt= 'Occasion'
+  %dd= @menu.occasion.try(:name)
+  %dt= 'Language'
+  %dd= @menu.language.try(:name)
+  %dt= 'Location'
+  %dd= @menu.location.try(:name)
+  %dt= 'Currency'
+  %dd= @menu.currency.try(:name)
+  %dt= 'Status'
+  %dd= @menu.status.try(:name)

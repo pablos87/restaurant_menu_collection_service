@@ -1,5 +1,5 @@
 class Dish < ActiveRecord::Base
-  has_many :menu_items
+  has_many :menu_items, inverse_of: :dish
 
   validates :name, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 1000 }, allow_blank: true

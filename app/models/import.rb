@@ -46,10 +46,14 @@ class Import
               CSV.foreach(file.path, headers: true) do |row|
                 model_name = get_model_name_by_header(row.headers) if model_name.blank?
                 objects << model_name.constantize.new(row.to_hash.symbolize_keys)
+                if objects.size == 10000
+		  model_name.constantize.import objects.uniq(&:id), recursive: true, :validate => false
+                  objects = []
+                end
                 sum += 1
               end
+              model_name.constantize.import objects.uniq(&:id), recursive: true, :validate => false
             end
-            model_name.constantize.import objects.uniq(&:id), recursive: true, batch_size: 10000
             model_name = ''
             Rails.logger.info "Sum: #{sum}"
           end

@@ -1,11 +1,7 @@
-.form-actions
-  = search_form_for @q, html: { class: 'form-inline' } do |f|
-    .row
-      .span12.searcher-multiline-inputs
-        .input-prepend
-          %span(class="add-on")= 'Id'
-          = f.text_field :id_eq, class: 'input-small'
-        .input-prepend
-          %span(class="add-on")= 'Name'
-          = f.text_field :name_eq, class: 'input-small'
-        = f.submit 'Search', class: 'btn btn-info'
+= search_form_for @q, html: { class: 'form-inline' } do |f|
+  .form-group
+    %label{ for: :id_eq_field }= 'Id'
+    = f.text_field :id_eq, class: 'form-control', id: :id_eq_field
+    %label{ for: :name_eq_field }= 'Name'
+    = f.text_field :name_eq, class: 'form-control', id: :name_eq_field
+    = f.submit 'Search', class: 'btn btn-info'

@@ -8,6 +8,6 @@ class PlacesController < ApplicationController
       .order('id ASC')
       .search(params[:q])
     @sort_type = params[:q][:s] unless params[:q].blank?
-    @events = @q.result.paginate(per_page: 50, page: params[:page])
+    @places = @q.result.paginate(per_page: 50, page: params[:page])
   end
 end

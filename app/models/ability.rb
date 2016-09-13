@@ -5,5 +5,6 @@ class Ability
     user ||= User.new # guest user (not logged in)
     can [:new, :create], Import
     can :index, Place
+    can :show, Menu
   end
 end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :imports, only: [:new, :create]
   resources :places, only: [:index]
+  resources :menus, only: [:show]
 
   root to: 'places#index'
 end

@@ -1,19 +1,17 @@
 class Menu < ActiveRecord::Base
   attr_accessor :location_type, :currency_symbol
 
-  belongs_to :sponsor
-  belongs_to :event#, inverse_of: :menus, autosave: true
-  belongs_to :venue
-  belongs_to :place
-  belongs_to :occasion
-  belongs_to :language
-  belongs_to :location
-  belongs_to :currency
-  belongs_to :status
-  #has_many :keywords_menus
-  #has_many :keywords, through: :keywords_menus, source: :keyword
+  belongs_to :sponsor, inverse_of: :menus
+  belongs_to :event, inverse_of: :menus
+  belongs_to :venue, inverse_of: :menus
+  belongs_to :place, inverse_of: :menus
+  belongs_to :occasion, inverse_of: :menus
+  belongs_to :language, inverse_of: :menus
+  belongs_to :location, inverse_of: :menus
+  belongs_to :currency, inverse_of: :menus
+  belongs_to :status, inverse_of: :menus
   has_and_belongs_to_many :keywords
-  has_many :menu_pages
+  has_many :menu_pages, inverse_of: :menu
 
   validates :name, length: { maximum: 255 }, allow_blank: true
   #validates :sponsor_id, :event_id, :venue_id, :place_id, :occasion_id, :language_id, :currency_id, :location_id, :status_id, numericality: { greater_than: 0 }, allow_blank: true 

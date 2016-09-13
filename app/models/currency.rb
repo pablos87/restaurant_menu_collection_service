@@ -1,6 +1,6 @@
 class Currency < ActiveRecord::Base
-  has_many :menus
-  belongs_to :currency_symbol
+  has_many :menus, inverse_of: :currency
+  belongs_to :currency_symbol, inverse_of: :currencies
   validates :name, presence: true, length: { maximum: 255 }
   validates :currency_symbol, presence: true
   

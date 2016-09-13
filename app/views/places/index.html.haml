@@ -1,14 +1,20 @@
-= link_to 'Import data', new_import_path
+.panel-body
+  = link_to 'Import data', new_import_path, class: "btn btn-info"
 = render 'search'
-- unless @plans.blank?
+- unless @places.blank?
   %table.table.table-bordered.table-condensed.table-centered
     %thead
       %tr
         %th= sort_link(@q, :id)
         %th= sort_link(@q, :name)
-    %body
-      - @plans.each do |plan|
+        %th= 'Events'
+    %tbody
+      - @places.each do |place|
         %tr
-          %td= plan.id
-          %td= plan.name
-  = pagination @plans
+          %td= place.id
+          %td= place.name
+          %td
+            - place.events.each do |event|
+              %ul
+                %li= link_to "#{event.name} - #{event.menu.venue.name}", event.menu
+  = pagination @places

@@ -1,3 +1,5 @@
+%h2= 'Import data'
 = simple_form_for @import do |f|
   = f.input :data_files, as: :file, input_html: { multiple: true }
-  = f.button :submit, 'Import'
+  = f.button :submit, 'Import', class: 'btn btn-primary'
+  = link_to 'Back', root_path, class: 'btn'

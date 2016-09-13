@@ -1,6 +1,6 @@
 class MenuItem < ActiveRecord::Base
-  belongs_to :menu_page
-  belongs_to :dish
+  belongs_to :menu_page, inverse_of: :menu_items
+  belongs_to :dish, inverse_of: :menu_items
   
   validates :menu_page, :dish, presence: true
   validates :price, :high_price, numericality: { greater_than: 0 }, allow_blank: true
