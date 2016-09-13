@@ -7,25 +7,24 @@ class Import
 
   attr_accessor :data_files
 
-  validates :data_files, :presence => true
-  validate :data_files_format, unless: Proc.new { |i| i.data_files.blank? }
-  validate :data_files_headers, unless: Proc.new { |i| i.data_files.blank? }
-  validate :all_data_files, unless: Proc.new { |i| i.data_files.blank? }
+  validates :data_files, presence: true
+  validate :data_files_format, unless: proc { |i| i.data_files.blank? }
+  validate :data_files_headers, unless: proc { |i| i.data_files.blank? }
+  validate :all_data_files, unless: proc { |i| i.data_files.blank? }
 
   MENU_HEADER = [:id, :name, :sponsor, :event, :venue, :place,
-		 :physical_description, :occasion, :notes, :call_number,
-		 :keywords, :language, :date, :location, :location_type,
-		 :currency, :currency_symbol, :status, :page_count,
-		 :dish_count]
+                 :physical_description, :occasion, :notes, :call_number,
+                 :keywords, :language, :date, :location, :location_type,
+                 :currency, :currency_symbol, :status, :page_count,
+                 :dish_count].freeze
   DISH_HEADER = [:id, :name, :description, :menus_appeared, :times_appeared,
                  :first_appeared, :last_appeared, :lowest_price,
-		 :highest_price]
+                 :highest_price].freeze
   MENU_ITEM_HEADER = [:id, :menu_page_id, :price, :high_price, :dish_id,
-                      :created_at, :updated_at, :xpos, :ypos]
+                      :created_at, :updated_at, :xpos, :ypos].freeze
   MENU_PAGE_HEADER = [:id, :menu_id, :page_number, :image_id, :full_height,
-                      :full_width, :uuid]
-
-  FILES_SORT_ORDER = ["Menu", "MenuPage", "MenuItem", "Dish"]
+                      :full_width, :uuid].freeze
+  FILES_SORT_ORDER = %w[Menu MenuPage MenuItem Dish].freeze
 
   def initialize(params = {})
     self.data_files = params[:data_files]
@@ -39,20 +38,20 @@ class Import
     print_memory_usage do
       print_time_spent do
         sum = 0
-	ActiveRecord::Base.transaction do
-	  data_files.map{ |file| [get_model_name(file), file] }.to_h.sort_by_array(FILES_SORT_ORDER).values.each do |file|
+        ActiveRecord::Base.transaction do
+          data_files.map{ |file| [get_model_name(file), file] }.to_h.sort_by_array(FILES_SORT_ORDER).values.each do |file|
             model_name = ''
             objects = []
             Rails.logger.silence do
               CSV.foreach(file.path, headers: true) do |row|
                 model_name = get_model_name_by_header(row.headers) if model_name.blank?
                 objects << model_name.constantize.new(row.to_hash.symbolize_keys)
-	        sum += 1
+                sum += 1
               end
             end
             model_name.constantize.import objects.uniq(&:id), recursive: true
-	    model_name = ''
-            puts "Sum: #{sum}"
+            model_name = ''
+            Rails.logger.info "Sum: #{sum}"
           end
         end
       end
@@ -120,15 +119,13 @@ class Import
     memory_before = `ps -o rss= -p #{Process.pid}`.to_i
     yield
     memory_after = `ps -o rss= -p #{Process.pid}`.to_i
-    puts "Memory: #{((memory_after - memory_before) / 1024.0).round(2)} MB"
+    Rails.logger.info "Memory: #{((memory_after - memory_before) / 1024.0).round(2)} MB"
   end
 
   def print_time_spent
     time = Benchmark.realtime do
       yield
     end
-    puts "Time: #{time.round(2)}"
+    Rails.logger.info "Time: #{time.round(2)}"
   end
-
 end
-

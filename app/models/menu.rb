@@ -10,8 +10,9 @@ class Menu < ActiveRecord::Base
   belongs_to :location
   belongs_to :currency
   belongs_to :status
-  has_many :keywords_menus
-  has_many :keywords, through: :keywords_menus
+  #has_many :keywords_menus
+  #has_many :keywords, through: :keywords_menus, source: :keyword
+  has_and_belongs_to_many :keywords
   has_many :menu_pages
 
   validates :name, length: { maximum: 255 }, allow_blank: true

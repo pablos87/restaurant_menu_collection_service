@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20160908114014) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "keywords_menus", force: :cascade do |t|
+  create_table "keywords_menus", id: false, force: :cascade do |t|
     t.integer  "keyword_id"
     t.integer  "menu_id"
     t.datetime "created_at", null: false

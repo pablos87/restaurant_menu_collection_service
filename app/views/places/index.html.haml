@@ -1,1 +1,14 @@
-= link_to 'Import data', new_import_path
+=link_to 'Import data', new_import_path
+= render 'search'= render 'search'
+- unless @plans.blank?
+  %table.table.table-bordered.table-condensed.table-centered
+    %thead
+      %tr
+        %th= sort_link(@q, :id)
+        %th= sort_link(@q, :name)
+    %body
+      - @plans.each do |plan|
+        %tr
+          %td= plan.id
+          %td= plan.name
+  = pagination @plans
