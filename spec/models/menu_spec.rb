@@ -34,7 +34,7 @@ RSpec.describe Menu, type: :model do
 
   describe "Associations" do
     it { should have_many(:menu_pages) }
-    it { should have_many(:keywords).through(:keywords_menus) }
+    it { have_and_belong_to_many(:keywords) }
     it { should belong_to(:sponsor) }
     it { should belong_to(:event) }
     it { should belong_to(:venue) }

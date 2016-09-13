@@ -49,7 +49,7 @@ class Import
                 sum += 1
               end
             end
-            model_name.constantize.import objects.uniq(&:id), recursive: true
+            model_name.constantize.import objects.uniq(&:id), recursive: true, batch_size: 10000
             model_name = ''
             Rails.logger.info "Sum: #{sum}"
           end

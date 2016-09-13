@@ -20,7 +20,6 @@ ommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
   end
 
   describe "Associations" do
-    it { should have_many(:menus).through(:keywords_menus) }
-    it { should have_many(:keywords_menus) }
+    it { have_and_belong_to_many(:menus) }
   end
 end

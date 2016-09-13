@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908114014) do
+ActiveRecord::Schema.define(version: 20160913175801) do
 
   create_table "currencies", force: :cascade do |t|
     t.string   "name"
@@ -67,10 +67,11 @@ ActiveRecord::Schema.define(version: 20160908114014) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "images", force: :cascade do |t|
+  create_table "images", id: false, force: :cascade do |t|
+    t.integer  "id",         limit: 8
     t.string   "path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "keywords", force: :cascade do |t|
@@ -128,12 +129,12 @@ ActiveRecord::Schema.define(version: 20160908114014) do
   create_table "menu_pages", force: :cascade do |t|
     t.integer  "menu_id"
     t.integer  "page_number"
-    t.integer  "image_id"
+    t.integer  "image_id",    limit: 8
     t.integer  "full_height"
     t.integer  "full_width"
     t.string   "uuid"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_index "menu_pages", ["menu_id"], name: "index_menu_pages_on_menu_id"
